@@ -1,36 +1,33 @@
 package org.example;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
 public class Main {
+
+    static int ipGlobalCount = 0;
+
     public static void main(String[] args) {
-        String ipAddress1 = "192.068.000.001";
-        String ipAddress11 = "192.068.000.002";
-        String ipAddress2 = "125.57.17.29";
-        int[] ipArr1 = Arrays.stream(ipAddress1.split("\\.")).mapToInt(Integer::parseInt).toArray();
-        int[] ipArr11 = Arrays.stream(ipAddress11.split("\\.")).mapToInt(Integer::parseInt).toArray();
-        int[] ipArr2 = Arrays.stream(ipAddress2.split("\\.")).mapToInt(Integer::parseInt).toArray();
-        System.out.println(Arrays.toString(ipArr1));
 
         ipNode rootNode = new ipNode();
-        int number = 0;
-        //rootNode.children = new HashMap<>();
-        makeBranch(rootNode, ipArr1);
-        makeBranch(rootNode, ipArr2);
-        makeBranch(rootNode, ipArr11);
-        makeBranch(rootNode, ipArr2);
-        makeBranch(rootNode, ipArr2);
-        makeBranch(rootNode, ipArr2);
-        System.out.println(rootNode);
-        System.out.println(rootNode.children.values());
-        printTree(rootNode, new StringBuilder());
-        countTree(rootNode, number);
-        System.out.println(number);
 
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("Z:\\CSV\\ipaddresses.txt"));
+            String line = reader.readLine();
+            while (line != null) {
+                int[] ipArr = Arrays.stream(line.split("\\.")).mapToInt(Integer::parseInt).toArray();
+                makeBranch(rootNode, ipArr);
+                line = reader.readLine();
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println(ipGlobalCount);
     }
 
     public static void makeBranch(ipNode root, int[] ipArr) {
@@ -49,37 +46,17 @@ public class Main {
             node.children = new HashMap<>();
         }
         if (!node.children.containsKey(ipArr[3])) {
+            ipGlobalCount++;
             node.children.put(ipArr[3], null);
         }
     }
 
-    public static void printTree(ipNode node, StringBuilder sb) {
-//        System.out.println(node);
-//        System.out.println(sb.toString());
-        if (node == null) {
-            System.out.print("node == null - ");
-            System.out.println("sb = " + sb.toString());
-        }
-        if (node != null && node.children != null) {
-            for(Map.Entry entry : node.children.entrySet()) {
-                System.out.println("node.children.values = " + node.children.values());
-                printTree((ipNode) entry.getValue(), new StringBuilder(sb).append(".").append(entry.getKey()));
-            }
-        }
+    public static class ipNode {
+        public Map<Integer, ipNode> children;
 
-    }
-    public static void countTree(ipNode node, int count) {
-        System.out.println(count);
-        if (node != null && node.children != null) {
-            for(Map.Entry entry : node.children.entrySet()) {
-                System.out.println("node.children.values = " + node.children.values());
-                if (node.children.values() == null) {
-                    count++;
-                } else {
-                    countTree((ipNode) entry.getValue(), count);
-                }
-
-            }
+        @Override
+        public String toString() {
+            return String.format("children = %s%n", this.children.keySet());
         }
     }
 }
