@@ -95,13 +95,13 @@ public class Main {
                                     boolean displayCount) {
         StringBuilder infoBuilder = new StringBuilder();
         if (displayLineNumber) {
-            infoBuilder.append(String.format("Line number = %d | ", currentLine));
+            infoBuilder.append(String.format("Line number = %,d | ", currentLine));
         }
         if (displayIPAddress) {
             infoBuilder.append(String.format("IP address = %s | ", ipAddress));
         }
         if (displayCount) {
-            infoBuilder.append(String.format("Current line number = %d", ipGlobalCount));
+            infoBuilder.append(String.format("Current ipGlobalCount = %,d", ipGlobalCount));
         }
         System.out.println(infoBuilder);
     }
