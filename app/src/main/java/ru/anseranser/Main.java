@@ -1,11 +1,11 @@
-package org.example;
+package ru.anseranser;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.BitSet;
 
-public class MainBit {
+public class Main {
     public static void main(String[] args) {
 
         BitSet ipset_0_127 = new BitSet(Integer.MAX_VALUE);
@@ -41,7 +41,6 @@ public class MainBit {
             long octetValue = Long.parseLong(octetStrings[i]);
             result += octetValue << (8 * (3 - i));
         }
-
         return result;
     }
 }
