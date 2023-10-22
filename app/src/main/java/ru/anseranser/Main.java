@@ -11,7 +11,7 @@ public class Main {
 
     @Command
         (name = "ipCounter", version = "ipCounter 1.0", mixinStandardHelpOptions = true)
-    public static class App implements Runnable {
+    public static final class App implements Runnable {
 
         @Parameters
             (paramLabel = "FILE", description = "Input file containing IP addresses")
