@@ -16,6 +16,10 @@
 
 Программа принимает в качестве параметра путь к файлу со списком IP адресов и ключ "-d", включающий отображение информации о номере считываемой строки и IP адресе в этой строке.  
 
+```
+./build/install/app-shadow/bin/app -d ./src/test/resources/small
+```
+
 Пример работы:  
 
 [![asciicast](https://asciinema.org/a/xVd5egkriWnoasRwT9Mj2uahD.svg)](https://asciinema.org/a/xVd5egkriWnoasRwT9Mj2uahD)
