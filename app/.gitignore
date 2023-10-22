@@ -70,3 +70,4 @@ replay_pid*### Example user template template
 .idea
 out
 gen
+!/gradle/wrapper/gradle-wrapper.jar
