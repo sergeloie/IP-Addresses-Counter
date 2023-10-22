@@ -27,6 +27,7 @@ dependencies {
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 
+
 }
 
 shadowJar {
@@ -35,6 +36,8 @@ shadowJar {
 
 test {
     useJUnitPlatform()
+    minHeapSize = "1024m"
+    maxHeapSize = "4096m"
 }
 application {
     mainClass = 'ru.anseranser.Main'
