@@ -42,3 +42,9 @@ test {
 application {
     mainClass = 'ru.anseranser.Main'
 }
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
+}
