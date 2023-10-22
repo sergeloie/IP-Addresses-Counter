@@ -10,6 +10,9 @@ run-large-debug:
 build:
 	./gradlew clean installShadowDist
 
+report:
+	@./gradlew jacocoTestReport
+
 run-movie:
 	make run-small
 	make run-small-debug
