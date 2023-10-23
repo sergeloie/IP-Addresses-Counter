@@ -8,7 +8,6 @@ import picocli.CommandLine;
 
 public class Main {
 
-
     @Command
         (name = "ipCounter", version = "ipCounter 1.0", mixinStandardHelpOptions = true)
     public static final class App implements Runnable {
