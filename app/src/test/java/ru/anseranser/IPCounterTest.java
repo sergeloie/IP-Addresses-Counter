@@ -3,18 +3,14 @@ package ru.anseranser;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.BitSet;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static ru.anseranser.IPUtils.ipToLong;
 
 
 class IPCounterTest {
-    private BitSet ipset0127 = new BitSet(Integer.MAX_VALUE);
-    private BitSet ipset128255 = new BitSet(Integer.MAX_VALUE);
-    private IPStorage ipStorage = new IPStorage();
 
+    private IPStorage ipStorage = new IPStorage();
 
     @Test
     void isBiective() {
@@ -43,5 +39,17 @@ class IPCounterTest {
         String fileName = "src/test/resources/ip.txt";
         long actual = IPCounter.countIPs(fileName, false);
         assertEquals(3, actual);
+    }
+
+    @Test
+    void getTest() {
+        String ip1 = "253.1.1.1";
+        String ip2 = "127.0.0.1";
+        String expected = "127.0.0.1 is not in the set";
+        long ipl1 = ipToLong(ip1);
+        long ipl2 = ipToLong(ip2);
+        ipStorage.put(ip1);
+        assertEquals(ip1, ipStorage.get(ipl1));
+        assertEquals(expected, ipStorage.get(ipl2));
     }
 }

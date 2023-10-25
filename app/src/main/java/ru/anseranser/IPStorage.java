@@ -15,6 +15,9 @@ public class IPStorage {
         this.ipSet128255 = new BitSet(Integer.MAX_VALUE);
     }
 
+    /**
+     * @param ipAddress - IP address to put in storage
+     */
     public void put(String ipAddress) {
         long ipNumericValue = ipToLong(ipAddress);
         if (ipNumericValue < Integer.MAX_VALUE) {
@@ -24,6 +27,10 @@ public class IPStorage {
         }
     }
 
+    /**
+     * @param ipAddress - IP address to check in storage
+     * @return true if IP address is in storage, false otherwise
+     */
     public boolean check(String ipAddress) {
         long ipNumericValue = ipToLong(ipAddress);
         if (ipNumericValue < Integer.MAX_VALUE) {
@@ -33,6 +40,11 @@ public class IPStorage {
         }
     }
 
+    /**
+     * @param ipNumericValue - numeric value of IP address to get from storage
+     * @return String representation of IP address from storage,
+     * or String "%IP address% not in the set" if IP address is not in storage
+     */
     public String get(long ipNumericValue) {
         String result = longToIp(ipNumericValue);
         if (ipNumericValue < Integer.MAX_VALUE && ipSet0127.get((int) ipNumericValue)) {
@@ -44,6 +56,9 @@ public class IPStorage {
         }
     }
 
+    /**
+     * @return number of IP addresses in storage
+     */
     public long count() {
         return this.ipSet0127.cardinality() + this.ipSet128255.cardinality();
     }
