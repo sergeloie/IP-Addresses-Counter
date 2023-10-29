@@ -33,6 +33,12 @@ class IPSetTest {
     }
 
     @Test
+    void testFile() {
+        String file = "./src/test/resources/small";
+        assertEquals(8, IPCounter.countIPs(file, false));
+    }
+
+    @Test
     void testStorage() {
         IPSet ipSet = new IPSet();
         long test1 = ipToLong("192.168.1.1");
