@@ -4,6 +4,9 @@ run-small:
 run-small-debug:
 	./build/install/app-shadow/bin/app -d ./src/test/resources/small
 
+run-large:
+	./build/install/app-shadow/bin/app /mnt/2TB/inc/Download/ip_addresses/ip_addresses
+
 run-large-debug:
 	./build/install/app-shadow/bin/app -d /mnt/2TB/inc/Download/ip_addresses/ip_addresses
 

@@ -11,7 +11,7 @@ class IPCounter {
 
     static long countIPs(String inputFile, boolean displayCount) {
 
-        IPStorage ipStorage = new IPStorage();
+        IPSet ipSet = new IPSet();
         long lineCounter = 0;
 
         try {
@@ -19,7 +19,7 @@ class IPCounter {
             String line = reader.readLine();
             while (line != null) {
                 if (isIPv4Address(line)) {
-                    ipStorage.put(line);
+                    ipSet.set(line);
                 }
                 if (displayCount) {
                     System.out.printf("line number = %,d | IP Address = %s%n", ++lineCounter, line);
@@ -31,6 +31,6 @@ class IPCounter {
 
             e.printStackTrace();
         }
-        return ipStorage.count();
+        return ipSet.cardinality();
     }
 }
