@@ -11,7 +11,9 @@ class IPCounter {
 
     static long countIPs(String inputFile, boolean displayCount) {
 
-        IPSet ipSet = new IPSet();
+
+        //IPSet ipSet = new IPSet();
+        QuadSet quadSet = new QuadSet();
         long lineCounter = 0;
 
         try {
@@ -19,11 +21,16 @@ class IPCounter {
             String line = reader.readLine();
             while (line != null) {
                 if (isIPv4Address(line)) {
-                    ipSet.set(line);
+                    //ipSet.set(line);
+                    quadSet.set(line);
                 }
                 if (displayCount) {
                     System.out.printf("line number = %,d | IP Address = %s%n", ++lineCounter, line);
                 }
+//                lineCounter++;
+//                if (lineCounter % 1_000_000 == 0) {
+//                    System.out.printf("lineCounter = %,d | ipSet.cardinality = %,d%n", lineCounter, quadSet.size());
+//                }
                 line = reader.readLine();
             }
             reader.close();
@@ -31,6 +38,7 @@ class IPCounter {
 
             e.printStackTrace();
         }
-        return ipSet.cardinality();
+//        return ipSet.cardinality();
+        return quadSet.size();
     }
 }

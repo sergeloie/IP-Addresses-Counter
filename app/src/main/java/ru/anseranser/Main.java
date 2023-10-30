@@ -23,9 +23,14 @@ public class Main {
 
         @Override
         public void run() {
+            long startTime = System.currentTimeMillis();
 
             long result = IPCounter.countIPs(inputFile, displayCount);
             System.out.printf("Total count of unique IP Addresses in %s = %,d%n", inputFile, result);
+
+            long endTime = System.currentTimeMillis();
+
+            System.out.printf("Execution time: %,d ms%n", endTime - startTime);
         }
     }
 
