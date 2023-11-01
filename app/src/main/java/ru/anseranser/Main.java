@@ -5,6 +5,7 @@ import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 import picocli.CommandLine;
 
+import static org.apache.commons.lang3.time.DurationFormatUtils.formatDuration;
 
 public class Main {
 
@@ -20,25 +21,28 @@ public class Main {
             (names = "-d", description = "Display line number and IP address")
         private boolean displayCount;
 
+        @Option
+            (names = "-v", description = "Verify that the string is the correct IP address")
+        private boolean verifyIP;
+
+        @Option
+            (names = "-m", description = "for large files, displays information on every millionth line")
+        private boolean displayMega;
+
 
         @Override
         public void run() {
             long startTime = System.currentTimeMillis();
-
-            long result = IPCounter.countIPs(inputFile, displayCount);
-            System.out.printf("Total count of unique IP Addresses in %s = %,d%n", inputFile, result);
-
+            long result1 = IPCounter.countIPs(inputFile, displayCount, verifyIP, displayMega);
+            System.out.printf("Total count of unique IP Addresses in %s = %,d%n", inputFile, result1);
             long endTime = System.currentTimeMillis();
+            System.out.printf("Execution time: %s %n", formatDuration(endTime - startTime, "HH:mm:ss.SSS"));
 
-            System.out.printf("Execution time: %,d ms%n", endTime - startTime);
         }
     }
 
     public static void main(String[] args) {
-
         int exitCode = new CommandLine(new App()).execute(args);
         System.exit(exitCode);
-
-
     }
 }

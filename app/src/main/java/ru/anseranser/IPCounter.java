@@ -9,10 +9,9 @@ import static ru.anseranser.IPUtils.isIPv4Address;
 
 class IPCounter {
 
-    static long countIPs(String inputFile, boolean displayCount) {
+    static long countIPs(String inputFile, boolean displayCount, boolean verifyIP, boolean displayMega) {
 
 
-        //IPSet ipSet = new IPSet();
         QuadSet quadSet = new QuadSet();
         long lineCounter = 0;
 
@@ -20,17 +19,28 @@ class IPCounter {
             BufferedReader reader = new BufferedReader(new FileReader(inputFile));
             String line = reader.readLine();
             while (line != null) {
-                if (isIPv4Address(line)) {
-                    //ipSet.set(line);
+                if (verifyIP) {
+                    if (isIPv4Address(line)) {
+                        quadSet.set(line);
+                    }
+                } else {
                     quadSet.set(line);
                 }
+
+                lineCounter++;
+
                 if (displayCount) {
-                    System.out.printf("line number = %,d | IP Address = %s%n", ++lineCounter, line);
+                    System.out.printf("line number = %,d | IP Address = %s%n", lineCounter, line);
                 }
-//                lineCounter++;
-//                if (lineCounter % 1_000_000 == 0) {
-//                    System.out.printf("lineCounter = %,d | ipSet.cardinality = %,d%n", lineCounter, quadSet.size());
-//                }
+
+                if (displayMega) {
+                    if (lineCounter % 1_000_000 == 0) {
+                        System.out.printf("lineCounter = %,d | ipSet.cardinality = %,d%n",
+                                lineCounter,
+                                quadSet.cardinality());
+                    }
+                }
+
                 line = reader.readLine();
             }
             reader.close();
@@ -38,7 +48,8 @@ class IPCounter {
 
             e.printStackTrace();
         }
-//        return ipSet.cardinality();
-        return quadSet.size();
+        return quadSet.cardinality();
     }
+
+
 }

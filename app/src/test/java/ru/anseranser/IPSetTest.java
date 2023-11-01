@@ -35,7 +35,7 @@ class IPSetTest {
     @Test
     void testFile() {
         String file = "./src/test/resources/small";
-        assertEquals(8, IPCounter.countIPs(file, false));
+        assertEquals(8, IPCounter.countIPs(file, false, false, false));
     }
 
     @Test

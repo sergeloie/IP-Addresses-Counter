@@ -46,7 +46,6 @@ public class IPSet {
     public void set(long value, boolean bit) {
         int cellNumber = getCellNumber(value);
         int cellIndex = getCellIndex(value);
-        //storage[cellNumber] = bit ? storage[cellNumber] | 1 << cellIndex : storage[cellNumber] & ~(1 << cellIndex);
         storage[cellNumber] = bit
                 ? setTrue(storage[cellNumber], cellIndex)
                 : setFalse(storage[cellNumber], cellIndex);
