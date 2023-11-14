@@ -23,7 +23,7 @@ run-movie:
 asciinema:
 	clear
 	asciinema rec -c "make run-movie"
-sonar
+sonar:
 	./gradlew build sonar --info
 
 .PHONY: build
