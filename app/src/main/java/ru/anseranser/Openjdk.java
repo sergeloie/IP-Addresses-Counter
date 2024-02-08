@@ -1,3 +1,5 @@
+package ru.anseranser;
+
 public class Openjdk {
     public static long textToNumericFormatV4(String src)
     {

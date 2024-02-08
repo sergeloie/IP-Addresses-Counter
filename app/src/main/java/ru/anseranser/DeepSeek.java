@@ -1,3 +1,5 @@
+package ru.anseranser;
+
 public class DeepSeek {
 
     public static long DeepSeek_textToNumericFormatV4(String src) {
