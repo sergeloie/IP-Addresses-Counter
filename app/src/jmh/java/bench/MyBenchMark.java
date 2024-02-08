@@ -5,11 +5,10 @@ import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
+import ru.anseranser.DeepSeek;
 import ru.anseranser.Openjdk;
 
 import java.util.concurrent.TimeUnit;
-
-import static ru.anseranser.DeepSeek.DeepSeek_textToNumericFormatV4;
 
 public class MyBenchMark {
 
@@ -17,14 +16,14 @@ public class MyBenchMark {
     @BenchmarkMode(Mode.Throughput)
     @OutputTimeUnit(TimeUnit.SECONDS)
     public void testDeep() {
-        DeepSeek_textToNumericFormatV4("192.168.1.1");
+        DeepSeek.DeepSeek_textToNumericFormatV4("192.168.1.1");
     }
 
     @Benchmark
     @BenchmarkMode(Mode.Throughput)
     @OutputTimeUnit(TimeUnit.SECONDS)
     public void testOpen() {
-        Openjdk.textToNumericFormatV4("192.168.1.1");
+        Openjdk.Openjdk_textToNumericFormatV4("192.168.1.1");
     }
 
     public static void main(String[] args) throws RunnerException {

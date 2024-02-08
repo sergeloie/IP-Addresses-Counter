@@ -1,7 +1,7 @@
 package ru.anseranser;
 
 public class Openjdk {
-    public static long textToNumericFormatV4(String src)
+    public static long Openjdk_textToNumericFormatV4(String src)
     {
 
         long octetValue = 0;
