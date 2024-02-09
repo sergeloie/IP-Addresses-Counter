@@ -1,4 +1,4 @@
-package ru.anseranser;
+package bench;
 
 import java.util.regex.Pattern;
 

@@ -2,10 +2,10 @@ package ru.anseranser;
 
 import java.util.regex.Pattern;
 
-class IPUtils {
+public class IPUtils {
 
 
-    static long ipToLong(String ipAddress) {
+    public static long ipToLong(String ipAddress) {
         String[] octetStrings = ipAddress.split("\\.");
         long result = 0;
 
