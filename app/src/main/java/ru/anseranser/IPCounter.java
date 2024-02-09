@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import static ru.anseranser.IPUtils.isIPv4Address;
+import static ru.anseranser.Openjdk.Openjdk_textToNumericFormatV4;
 
 
 class IPCounter {
@@ -14,19 +15,23 @@ class IPCounter {
 
         QuadSet quadSet = new QuadSet();
         long lineCounter = 0;
+        long currentLineValue;
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader(inputFile));
             String line = reader.readLine();
             while (line != null) {
-                if (verifyIP) {
+/*                if (verifyIP) {
                     if (isIPv4Address(line)) {
                         quadSet.set(line);
                     }
                 } else {
                     quadSet.set(line);
+                }*/
+                currentLineValue = Openjdk_textToNumericFormatV4(line);
+                if (currentLineValue != -1) {
+                    quadSet.set(currentLineValue);
                 }
-
                 lineCounter++;
 
                 if (displayCount) {

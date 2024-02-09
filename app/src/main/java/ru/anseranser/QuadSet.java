@@ -43,6 +43,13 @@ public class QuadSet {
         omniSet.get(setNumber).set(setPosition);
     }
 
+
+    public void set(long ipNumericValue) {
+        int setPosition = Math.toIntExact(ipNumericValue & (setSize - 1)); // остаток от деления на setSize
+        int setNumber = Math.toIntExact(ipNumericValue >> 30); // целочисленное деление на setSize
+        omniSet.get(setNumber).set(setPosition);
+    }
+
     /**
      * @return cardinality
      */
