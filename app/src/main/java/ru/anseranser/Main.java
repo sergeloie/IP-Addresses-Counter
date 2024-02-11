@@ -22,10 +22,6 @@ public class Main {
         private boolean displayCount;
 
         @Option
-            (names = "-v", description = "Verify that the string is the correct IP address")
-        private boolean verifyIP;
-
-        @Option
             (names = "-m", description = "for large files, displays information on every millionth line")
         private boolean displayMega;
 
@@ -33,7 +29,7 @@ public class Main {
         @Override
         public void run() {
             long startTime = System.currentTimeMillis();
-            long result1 = IPCounter.countIPs(inputFile, displayCount, verifyIP, displayMega);
+            long result1 = IPCounter.countIPs(inputFile, displayCount, displayMega);
             System.out.printf("Total count of unique IP Addresses in %s = %,d%n", inputFile, result1);
             long endTime = System.currentTimeMillis();
             System.out.printf("Execution time: %s %n", formatDuration(endTime - startTime, "HH:mm:ss.SSS"));

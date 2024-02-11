@@ -10,7 +10,7 @@ class QuadSetTest {
     void set() {
 
         QuadSet quadset = new QuadSet();
-        quadset.set("0.0.0.0.");
+        quadset.set("0.0.0.0");
         assertEquals(1, quadset.cardinality());
         quadset.set("255.255.255.255");
         assertEquals(2, quadset.cardinality());

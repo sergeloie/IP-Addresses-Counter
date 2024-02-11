@@ -35,7 +35,7 @@ class IPSetTest {
     @Test
     void testFile() {
         String file = "./src/test/resources/small";
-        assertEquals(8, IPCounter.countIPs(file, false, false, false));
+        assertEquals(8, IPCounter.countIPs(file, false, false));
     }
 
     @Test
@@ -49,22 +49,22 @@ class IPSetTest {
         assertEquals(1, ipSet.cardinality());
     }
 
-//    @Test
-//    void testFullFill() {
-//        IPSet ipSet = new IPSet();
-//        StringBuilder sb = new StringBuilder();
-//        for (int o1 = 0; o1 <=255; o1++) {
-//            for (int o2 = 0; o2 <=255; o2++) {
-//                for (int o3 = 0; o3 <=255; o3++) {
-//                    for (int o4 = 0; o4 <=255; o4++) {
-//                        sb.append(o1).append(".").append(o2).append(".").append(o3).append(".").append(o4);
-//                        ipSet.set(sb.toString());
-//                        sb.setLength(0);
-//                    }
-//                }
-//            }
-//            System.out.println(o1);
-//        }
-//        System.out.println(ipSet.cardinality());
-//    }
+/*    @Test
+    void testFullFill() {
+        IPSet ipSet = new IPSet();
+        StringBuilder sb = new StringBuilder();
+        for (int o1 = 0; o1 <=255; o1++) {
+            for (int o2 = 0; o2 <=255; o2++) {
+                for (int o3 = 0; o3 <=255; o3++) {
+                    for (int o4 = 0; o4 <=255; o4++) {
+                        sb.append(o1).append(".").append(o2).append(".").append(o3).append(".").append(o4);
+                        ipSet.set(sb.toString());
+                        sb.setLength(0);
+                    }
+                }
+            }
+            System.out.println(o1);
+        }
+        System.out.println(ipSet.cardinality());
+    }*/
 }

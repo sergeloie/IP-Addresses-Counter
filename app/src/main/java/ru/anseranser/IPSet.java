@@ -1,8 +1,8 @@
 package ru.anseranser;
 
-import static ru.anseranser.IPUtils.ipToLong;
+import static ru.anseranser.IPConverter.textToNumericFormatV4;
 
-public class IPSet {
+public final class IPSet {
 
     private static final int STORAGE_SIZE = 67_108_864;
 
@@ -55,12 +55,10 @@ public class IPSet {
      * @param ipAddress - ip address in string format to store in bitset
      */
     public void set(String ipAddress) {
-        set(ipToLong(ipAddress), true);
+        set(textToNumericFormatV4(ipAddress), true);
     }
 
-
     public void set(long ipAddress) {
-
         set(ipAddress, true);
     }
 
@@ -74,7 +72,4 @@ public class IPSet {
         }
         return sum;
     }
-
-
-
 }

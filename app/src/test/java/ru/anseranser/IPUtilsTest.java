@@ -3,11 +3,8 @@ package ru.anseranser;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static ru.anseranser.IPUtils.ipToLong;
 import static ru.anseranser.IPUtils.longToIp;
-import static ru.anseranser.IPUtils.isIPv4Address;
 
 class IPUtilsTest {
 
@@ -23,11 +20,4 @@ class IPUtilsTest {
         assertEquals("127.0.0.1", longToIp(long1));
     }
 
-    @Test
-    void isIPv4AddressTest() {
-        String ip1 = "192.168.1.1";
-        String ip2 = "192.168.302.1";
-        assertTrue(isIPv4Address(ip1));
-        assertFalse(isIPv4Address(ip2));
-    }
 }
