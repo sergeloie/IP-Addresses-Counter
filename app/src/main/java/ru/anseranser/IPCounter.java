@@ -14,6 +14,7 @@ class IPCounter {
 
 
         QuadSet quadSet = new QuadSet();
+        IPSet ipSet = new IPSet();
         long lineCounter = 0;
         long currentLineValue;
 
@@ -30,7 +31,7 @@ class IPCounter {
                 }*/
                 currentLineValue = Openjdk_textToNumericFormatV4(line);
                 if (currentLineValue != -1) {
-                    quadSet.set(currentLineValue);
+                    ipSet.set(currentLineValue);
                 }
                 lineCounter++;
 
@@ -42,7 +43,7 @@ class IPCounter {
                     if (lineCounter % 1_000_000 == 0) {
                         System.out.printf("lineCounter = %,d | ipSet.cardinality = %,d%n",
                                 lineCounter,
-                                quadSet.cardinality());
+                                ipSet.cardinality());
                     }
                 }
 
@@ -53,7 +54,7 @@ class IPCounter {
 
             e.printStackTrace();
         }
-        return quadSet.cardinality();
+        return ipSet.cardinality();
     }
 
 

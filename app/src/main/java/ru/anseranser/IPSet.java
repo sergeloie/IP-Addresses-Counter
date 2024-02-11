@@ -58,6 +58,12 @@ public class IPSet {
         set(ipToLong(ipAddress), true);
     }
 
+
+    public void set(long ipAddress) {
+
+        set(ipAddress, true);
+    }
+
     /**
      * @return number of bits set in this bitset
      */
