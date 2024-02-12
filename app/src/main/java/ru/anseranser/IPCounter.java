@@ -11,7 +11,6 @@ class IPCounter {
 
     static long countIPs(String inputFile, boolean displayCount, boolean displayMega) {
 
-
         QuadSet quadSet = new QuadSet();
 
         long lineCounter = 0;
@@ -21,7 +20,6 @@ class IPCounter {
             BufferedReader reader = new BufferedReader(new FileReader(inputFile));
             String line = reader.readLine();
             while (line != null) {
-
                 currentLineValue = textToNumericFormatV4(line);
                 if (currentLineValue != -1) {
                     quadSet.set(currentLineValue);
