@@ -8,7 +8,7 @@ import static ru.anseranser.IPConverter.textToNumericFormatV4;
 
 public final class QuadSet {
 
-    private final int setSize = 1_073_741_824; // четверть от общего числа IP адресов, 2 в 30 степени
+    private static final int SET_SIZE = 1_073_741_824; // четверть от общего числа IP адресов, 2 в 30 степени
 
     private BitSet ipset0;
     private BitSet ipset1;
@@ -40,7 +40,7 @@ public final class QuadSet {
      * @param ipNumericValue - long value of IP address i.e. 4294967295 for 255.255.255.255
      */
     public void set(long ipNumericValue) {
-        int setPosition = Math.toIntExact(ipNumericValue & (setSize - 1)); // остаток от деления на setSize
+        int setPosition = Math.toIntExact(ipNumericValue & (SET_SIZE - 1)); // остаток от деления на setSize
         int setNumber = Math.toIntExact(ipNumericValue >> 30); // целочисленное деление на setSize
         omniSet.get(setNumber).set(setPosition);
     }

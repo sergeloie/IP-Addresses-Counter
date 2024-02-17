@@ -16,8 +16,7 @@ class IPCounter {
         long lineCounter = 0;
         long currentLineValue;
 
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+        try (BufferedReader reader = new BufferedReader(new FileReader(inputFile))) {
             String line = reader.readLine();
             while (line != null) {
                 currentLineValue = textToNumericFormatV4(line);
@@ -30,22 +29,21 @@ class IPCounter {
                     System.out.printf("line number = %,d | IP Address = %s%n", lineCounter, line);
                 }
 
-                if (displayMega) {
-                    if (lineCounter % 1_000_000 == 0) {
-                        System.out.printf("lineCounter = %,d | ipSet.cardinality = %,d%n",
-                                lineCounter,
-                                quadSet.cardinality());
-                    }
+                if (displayMega && (lineCounter % 1_000_000 == 0)) {
+                    System.out.printf("lineCounter = %,d | ipSet.cardinality = %,d%n",
+                            lineCounter,
+                            quadSet.cardinality());
+
                 }
 
                 line = reader.readLine();
+
             }
-            reader.close();
+            return quadSet.cardinality();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new IllegalStateException("Невозможно прочитать файл", e);
         }
-        return quadSet.cardinality();
+
+
     }
-
-
 }

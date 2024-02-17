@@ -2,6 +2,8 @@ package ru.anseranser;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -33,7 +35,7 @@ class IPSetTest {
     }
 
     @Test
-    void testFile() {
+    void testFile() throws IOException {
         String file = "./src/test/resources/small";
         assertEquals(8, IPCounter.countIPs(file, false, false));
     }
