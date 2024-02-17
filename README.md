@@ -22,8 +22,8 @@
 "-d", включающий отображение информации о номере считываемой строки и IP адресе в этой строке.  
 "-m", для больших файлов, отображает информацию о каждой миллионной строке  
 
-```
-./build/install/app-shadow/bin/app -d ./src/test/resources/small
+```shell
+./app/build/install/app/bin/app -d ./app/src/test/resources/small
 ```
 
 
