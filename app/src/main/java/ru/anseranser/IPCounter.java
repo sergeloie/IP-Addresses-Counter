@@ -41,7 +41,7 @@ class IPCounter {
             }
             return quadSet.cardinality();
         } catch (IOException e) {
-            throw new IllegalStateException("Невозможно прочитать файл", e);
+            throw new IllegalStateException("Cannot read file", e);
         }
 
 
