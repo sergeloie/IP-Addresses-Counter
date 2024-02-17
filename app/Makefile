@@ -29,4 +29,7 @@ sonar:
 run-dist:
 	./gradlew clean installDist
 
+check:
+	./gradlew check
+
 .PHONY: build
