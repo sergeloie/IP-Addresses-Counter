@@ -6,3 +6,6 @@ sonar:
 
 run-dist:
 	make -C app run-dist
+
+check:
+	make -C app check

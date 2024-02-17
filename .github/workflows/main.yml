@@ -29,12 +29,26 @@ jobs:
         with:
           arguments: build
           build-root-directory: app
+
+      - name: Run all checks, disabling dependency graph generation
+        run: make check
+
+      - name: Generate JaCoCo report
+        run: make report
+
+      - name: Upload JaCoCo report
+        uses: actions/upload-artifact@v2
+        with:
+          name: jacoco-report
+          path: build/reports/jacoco/test/html/index.html
+
       - name: Cache Gradle packages
         uses: actions/cache@v3
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
+
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
