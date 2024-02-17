@@ -26,4 +26,7 @@ asciinema:
 sonar:
 	./gradlew build sonar --info
 
+run-dist:
+	./gradlew clean installDist
+
 .PHONY: build

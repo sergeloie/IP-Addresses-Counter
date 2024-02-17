@@ -1,11 +1,12 @@
-package ru.anseranser;
+package bench;
 
 import java.util.regex.Pattern;
 
-public class IPUtilsTest {
+public class RegexpTest {
 
-    static String outerPattern = "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$";
-    static Pattern outerRegexPattern = Pattern.compile(outerPattern);
+    public static final String OUTER_PATTERN =
+            "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$";
+    public static final Pattern OUTER_REGEX_PATTERN = Pattern.compile(OUTER_PATTERN);
 
     public static boolean isIPv4Address(String ipAddress) {
         String pattern = "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$";
@@ -14,7 +15,6 @@ public class IPUtilsTest {
     }
 
     public static boolean isIPv4AddressOuter(String ipAddress) {
-
-        return outerRegexPattern.matcher(ipAddress).matches();
+        return OUTER_REGEX_PATTERN.matcher(ipAddress).matches();
     }
 }

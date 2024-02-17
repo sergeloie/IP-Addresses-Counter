@@ -4,8 +4,6 @@ import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
@@ -13,29 +11,35 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
 
 import java.util.concurrent.TimeUnit;
 
-import static bench.RegexpTest.isIPv4Address;
-import static bench.RegexpTest.isIPv4AddressOuter;
+import static ru.anseranser.IPConverter.textToNumericFormatV4;
 
-@State(Scope.Thread)
-public class MatchBench {
+public class IPLengthBench {
 
     @Benchmark
     @BenchmarkMode(Mode.Throughput)
     @OutputTimeUnit(TimeUnit.SECONDS)
-    public static void isIPv4AddressInnerRegex() {
-        isIPv4Address("192.168.125.147");
+    public static void test4Digit() {
+        textToNumericFormatV4("1.9.8.5");
+    }
+
+
+    @Benchmark
+    @BenchmarkMode(Mode.Throughput)
+    @OutputTimeUnit(TimeUnit.SECONDS)
+    public static void test8Digit() {
+        textToNumericFormatV4("19.16.11.11");
     }
 
     @Benchmark
     @BenchmarkMode(Mode.Throughput)
     @OutputTimeUnit(TimeUnit.SECONDS)
-    public static void isIPv4AddressOuterRegex() {
-        isIPv4AddressOuter("192.168.125.147");
+    public static void test12Digit() {
+        textToNumericFormatV4("192.168.111.111");
     }
 
     public static void main(String[] args) throws RunnerException {
         Options opt = new OptionsBuilder()
-                .include(MatchBench.class.getSimpleName())
+                .include(IPLengthBench.class.getSimpleName())
                 .forks(1)
                 .build();
 

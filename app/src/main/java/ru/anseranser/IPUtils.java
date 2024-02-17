@@ -1,11 +1,9 @@
 package ru.anseranser;
 
-import java.util.regex.Pattern;
-
-class IPUtils {
+public class IPUtils {
 
 
-    static long ipToLong(String ipAddress) {
+    public static long ipToLong(String ipAddress) {
         String[] octetStrings = ipAddress.split("\\.");
         long result = 0;
 
@@ -27,11 +25,5 @@ class IPUtils {
             }
         }
         return builder.toString();
-    }
-
-    static boolean isIPv4Address(String ipAddress) {
-        String pattern = "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$";
-        Pattern regexPattern = Pattern.compile(pattern);
-        return regexPattern.matcher(ipAddress).matches();
     }
 }

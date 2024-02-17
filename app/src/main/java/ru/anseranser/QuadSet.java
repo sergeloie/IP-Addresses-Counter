@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.List;
 
-//import static org.apache.commons.io.FileUtils.byteCountToDisplaySize;
-import static ru.anseranser.IPUtils.ipToLong;
+import static ru.anseranser.IPConverter.textToNumericFormatV4;
 
-public class QuadSet {
+public final class QuadSet {
 
     private final int setSize = 1_073_741_824; // четверть от общего числа IP адресов, 2 в 30 степени
 
@@ -31,15 +30,18 @@ public class QuadSet {
     }
 
     /**
-     * @param ipAddress - IP address
+     * @param ipAddress - String representation of IP address i.e. "192.168.1.1"
      */
     public void set(String ipAddress) {
-        long ipNumericValue = ipToLong(ipAddress);
-//        int setPosition = (int) (ipNumericValue % setSize);
-        int setPosition = Math.toIntExact(ipNumericValue & (setSize - 1)); // остаток от деления на setSize
-//        int setNumber = (int) (ipNumericValue / setSize);
-        int setNumber = Math.toIntExact(ipNumericValue >> 30); // целочисленное деление на setSize
+        set(textToNumericFormatV4(ipAddress));
+    }
 
+    /**
+     * @param ipNumericValue - long value of IP address i.e. 4294967295 for 255.255.255.255
+     */
+    public void set(long ipNumericValue) {
+        int setPosition = Math.toIntExact(ipNumericValue & (setSize - 1)); // остаток от деления на setSize
+        int setNumber = Math.toIntExact(ipNumericValue >> 30); // целочисленное деление на setSize
         omniSet.get(setNumber).set(setPosition);
     }
 
@@ -48,15 +50,8 @@ public class QuadSet {
      */
     public long cardinality() {
 
-        int setCounter = 0;
         long result = 0;
         for (BitSet bitset : omniSet) {
-//            System.out.printf("Bitset %d Hash = %d | BitSet cardinality = %,d | BitSet size = %s%n",
-//                    setCounter++,
-//                    bitset.hashCode(),
-//                    bitset.cardinality(),
-//                    byteCountToDisplaySize(bitset.size() / 8));
-
             result += bitset.cardinality();
         }
         return result;
