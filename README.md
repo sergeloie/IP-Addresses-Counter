@@ -28,7 +28,59 @@
 
 
 
-P.S. При решении задачи был написан класс IPSet, позволяющий хранить информацию о всех адресах в одной структуре данных, но такое решение сразу занимает 512 MB памяти, в отличие от BitSet, который увеличивается динамически и поэтому не используется.
+P.S. При решении задачи был написан класс IPSet, позволяющий хранить информацию о всех адресах в одной структуре данных, но такое решение сразу занимает 512 MB памяти, в отличие от BitSet, который увеличивается динамически, и не даёт прироста производительности, поэтому не используется.
+
+В процессе решения были испробованы и отвергнуты следующие подходы:
+
+#### Префиксные деревья
+Огромный расход памяти - 160 миллионов адресов заняло 12 ГБ ОЗУ, после чего выполнение программы практически остановилось из-за нехватки памяти.  
+<br />
+  
+#### Использование регулярных выражений для проверки корректности IP адреса
+Значительно замедление скорости работы - порядка 5 часов на тестовый файл.
+
+Например, для метода isIPv4Address() скорость выполнения ≈ 700,000 операций в секунду. И 2,700,000, если вынести вычисление regexPattern из метода
+```java
+    public static boolean isIPv4Address(String ipAddress) {
+        String pattern = "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$";
+        Pattern regexPattern = Pattern.compile(pattern);
+        return regexPattern.matcher(ipAddress).matches();
+    }
+```
+
+| Benchmark                          | Mode  | Cnt |       Score |       Error | Units |
+|------------------------------------|-------|-----|------------:|------------:|-------|
+| MatchBench.isIPv4AddressInnerRegex | thrpt | 25  |  715006,184 |  ± 5881,340 | ops/s |
+| MatchBench.isIPv4AddressOuterRegex | thrpt | 25  | 2679271,358 | ± 92405,723 | ops/s |
+
+<br />
+
+#### Разбиение IP адреса на октеты и преобразование строки в число
+
+Сравнение метода ipToLong() и текущего метода для преобразования строки с IP адресом в число
+```java
+    public static long ipToLong(String ipAddress) {
+        String[] octetStrings = ipAddress.split("\\.");
+        long result = 0;
+
+        for (int i = 0; i < 4; i++) {
+            long octetValue = Long.parseLong(octetStrings[i]);
+            result += octetValue << (8 * (3 - i));
+        }
+        return result;
+    }
+```
+
+| Benchmark                              | Mode  | Cnt |        Score |        Error | Units |
+|----------------------------------------|-------|-----|-------------:|-------------:|-------|
+| IPtoLongBench.testStringSplitToIP      | thrpt | 25  |  6480849,205 | ± 177321,560 | ops/s |
+| IPtoLongBench.testStringCharByCharToIP | thrpt | 25  | 60621167,508 | ± 437508,189 | ops/s |
+
+---
+
+В итоге, сейчас используется метод посимвольного преобразования строки в IP адрес, подсмотренный в OpenJDK.
+Помимо преобразования в методе одновременно осуществляется проверка на корректность адреса.
+Скорость выполнения зависит от количества знаков.
 
 | Benchmark                 | Mode  | Cnt |         Score |         Error | Units |
 |---------------------------|-------|-----|--------------:|--------------:|-------|
@@ -36,23 +88,27 @@ P.S. При решении задачи был написан класс IPSet, 
 | IPLengthBench.test8Digit  | thrpt | 25  |  82186672,406 |  ± 545401,768 | ops/s |
 | IPLengthBench.test12Digit | thrpt | 25  |  59494004,545 | ± 2726267,979 | ops/s |
 
+<br />
 
-| Benchmark                              | Mode  | Cnt |        Score |        Error | Units |
-|----------------------------------------|-------|-----|-------------:|-------------:|-------|
-| IPtoLongBench.testStringSplitToIP      | thrpt | 25  |  6480849,205 | ± 177321,560 | ops/s |
-| IPtoLongBench.testStringCharByCharToIP | thrpt | 25  | 60621167,508 | ± 437508,189 | ops/s |
+Запуск для тестового файла в 106 ГБ, 8 миллиардов строк, показал следующие результаты:  
 
+Для SSD - 00:12:03.019
 
-| Benchmark                          | Mode  | Cnt |       Score |       Error | Units |
-|------------------------------------|-------|-----|------------:|------------:|-------|
-| MatchBench.isIPv4AddressInnerRegex | thrpt | 25  |  715006,184 |  ± 5881,340 | ops/s |
-| MatchBench.isIPv4AddressOuterRegex | thrpt | 25  | 2679271,358 | ± 92405,723 | ops/s |
+Для HDD - 00:19:34.167  
 
+---
 
-106Gb, 8 billions, SSD  
-Total count of unique IP Addresses in /mnt/diskc/ip_addresses/ip_addresses = 1 000 000 000  
-Execution time: 00:12:03.019
-
-106Gb, 8 billions, HDD  
-Total count of unique IP Addresses in /mnt/2TB/inc/Download/ip_addresses/ip_addresses = 1 000 000 000  
-Execution time: 00:19:34.167  
+Для запуска приложения необходимо склонировать репозиторий
+```shell
+gh repo clone sergeloie/IP-Addresses-Counter
+```
+  
+Перейти в каталог с приложением и скомпилировать его
+```shell
+cd IP-Addresses-Counter && make run-dist
+```
+  
+Запустить, указав параметры и путь к файлу
+```shell
+./app/build/install/app/bin/app -d ./app/src/test/resources/small
+```
