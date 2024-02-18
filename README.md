@@ -100,7 +100,7 @@ P.S. При решении задачи был написан класс IPSet, 
 
 Для запуска приложения необходимо склонировать репозиторий
 ```shell
-gh repo clone sergeloie/IP-Addresses-Counter
+git clone https://github.com/sergeloie/IP-Addresses-Counter.git
 ```
   
 Перейти в каталог с приложением и скомпилировать его
