@@ -5,8 +5,7 @@
  [![Test Coverage](https://api.codeclimate.com/v1/badges/ed3b9b81ba0273cb8e89/test_coverage)](https://codeclimate.com/github/sergeloie/IP-Addresses-Counter/test_coverage)
  [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=sergeloie_IP-Addresses-Counter&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=sergeloie_IP-Addresses-Counter)
 
-Реализация тестового задания из [Списка тестовых заданий для прокачки](https://github.com/Hexlet/ru-test-assignments).  
-а именно,  
+Реализация тестового задания  
 [Посчитать количество уникальных IP-адресов в простом текстовом файле (Kotlin/Java)](https://github.com/Ecwid/new-job/blob/master/IP-Addr-Counter.md).
 
 Реализация выполнена на Java с применением массива битов.  
